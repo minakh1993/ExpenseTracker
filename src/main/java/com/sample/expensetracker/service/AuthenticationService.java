@@ -11,7 +11,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
+
+import static com.sample.expensetracker.api.ClaimConstants.*;
 
 /**
  * @author M.khoshnevisan
@@ -31,7 +35,11 @@ public class AuthenticationService {
         ));
         UserEntity principal = (UserEntity) authenticate.getPrincipal();
         String jwt = jwtUtil.generateJWT(new HashMap<>() {{
-            put("nationalCode", principal.getNationalCode());
+            put(USER_ID, principal.getId());
+            put(NATIONAL_CODE, principal.getNationalCode());
+            put(ROLES, principal.getAuthorities() != null ? principal.getAuthorities()
+                    .stream().map(grantedAuthority -> grantedAuthority.getAuthority())
+                    .collect(Collectors.toList()) : new ArrayList<>());
         }});
         return userAssembler.convertToLoginResponseDto(principal, jwt);
     }

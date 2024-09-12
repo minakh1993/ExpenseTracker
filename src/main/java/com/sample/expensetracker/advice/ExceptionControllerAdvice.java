@@ -9,6 +9,7 @@ import com.sample.expensetracker.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -49,8 +50,8 @@ public class ExceptionControllerAdvice {
         return new ResponseEntity<>(httpServerException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<HttpServerException> handleAuthenticationException(AuthenticationException exception) {
+    @ExceptionHandler({AuthenticationException.class, AccessDeniedException.class})
+    public ResponseEntity<HttpServerException> handleAuthenticationException(Exception exception) {
         HttpServerException httpServerException = extractHttpServerException(exception, new HashMap<>());
         return new ResponseEntity<>(httpServerException, HttpStatus.UNAUTHORIZED);
     }

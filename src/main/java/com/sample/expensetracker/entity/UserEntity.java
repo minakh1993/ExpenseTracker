@@ -12,7 +12,7 @@ import java.util.Date;
  * @author M.khoshnevisan
  * @since 9/12/2024
  */
-@Table(name = "EXPENSE_USER")
+@Table(name = "APP_USER")
 @Entity
 public class UserEntity implements UserDetails {
 
@@ -43,6 +43,13 @@ public class UserEntity implements UserDetails {
     @Column(name = "FAMILY", nullable = false)
     private String family;
 
+    @ManyToMany
+    @JoinTable(
+            name = "USER_ROLE",
+            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
+    private Collection<RoleEntity> roles;
+
     public int getId() {
         return id;
     }
@@ -54,7 +61,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override
@@ -129,5 +136,13 @@ public class UserEntity implements UserDetails {
 
     public void setFamily(String family) {
         this.family = family;
+    }
+
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
     }
 }
