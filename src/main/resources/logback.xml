@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 minutes">
+    <property name="ROOT_LEVEL" value="WARN"/>
+    <property name="APPLICATION_LEVEL" value="INFO"/>
+    <property name="STACK_TRACE_COUNT" value="15"/>
+    <property name="CLASS_NAME_LENGTH" value="40"/>
+    <property name="APPLICATION_NAME" value="expense-tracker"/>
+
+    <property name="PATTERN" scope="context"
+              value="%date{yyyy-MM-dd'T'HH:mm:ss.SSS} [%level] requestId:[%mdc{requestId}] thread:[%-25.25(%thread)] userIP:[%mdc{userIP}] %logger{40}.%method@%line:%n    %message %rootException{${STACK_TRACE_COUNT}}%n"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="${APPLICATION_LEVEL}"/>
+    <logger name="org.springframework.security" level="${APPLICATION_LEVEL}"/>
+
+    <root level="${ROOT_LEVEL}">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

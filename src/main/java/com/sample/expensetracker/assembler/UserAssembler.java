@@ -12,8 +12,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAssembler {
 
-    public LoginResponseDto convertToLoginResponseDto(UserEntity user) {
+    public LoginResponseDto convertToLoginResponseDto(UserEntity user, String jwt) {
         LoginResponseDto loginResponseDto = new LoginResponseDto();
+        loginResponseDto.setJwtToken(jwt);
         UserInfoDto userInfoDto = new UserInfoDto();
         userInfoDto.setName(user.getName());
         userInfoDto.setFamily(user.getFamily());
