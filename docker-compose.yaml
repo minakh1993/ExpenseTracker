@@ -1,0 +1,6 @@
+version: '3.2'
+services:
+  expensetracker:
+    build: .
+    ports:
+      - 8082:8082
