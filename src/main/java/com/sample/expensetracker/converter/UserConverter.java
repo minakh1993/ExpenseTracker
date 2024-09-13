@@ -1,4 +1,4 @@
-package com.sample.expensetracker.assembler;
+package com.sample.expensetracker.converter;
 
 import com.sample.expensetracker.api.LoginResponseDto;
 import com.sample.expensetracker.api.UserInfoDto;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @since 9/12/2024
  */
 @Component
-public class UserAssembler {
+public class UserConverter {
 
     public LoginResponseDto convertToLoginResponseDto(UserEntity user, String jwt) {
         LoginResponseDto loginResponseDto = new LoginResponseDto();

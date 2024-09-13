@@ -1,7 +1,7 @@
-package com.sample.expensetracker.configuration.security;
+package com.sample.expensetracker.configuration;
 
 import com.sample.expensetracker.config.JwtConfig;
-import com.sample.expensetracker.repository.UserRepository;
+import com.sample.expensetracker.service.UserCacheableService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +46,7 @@ public class SecurityConfiguration {
             "/swagger-ui/**",
             "/swagger-ui.html"};
 
-    private final UserRepository userRepository;
+    private final UserCacheableService userService;
     private final JwtConfig jwtConfig;
 
     @Bean
@@ -65,7 +65,7 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByUsername(username)
+        return username -> userService.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 

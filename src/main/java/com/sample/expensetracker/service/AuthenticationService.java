@@ -2,7 +2,7 @@ package com.sample.expensetracker.service;
 
 import com.sample.expensetracker.api.LoginRequestDto;
 import com.sample.expensetracker.api.LoginResponseDto;
-import com.sample.expensetracker.assembler.UserAssembler;
+import com.sample.expensetracker.converter.UserConverter;
 import com.sample.expensetracker.entity.UserEntity;
 import com.sample.expensetracker.util.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,7 @@ import static com.sample.expensetracker.api.ClaimConstants.*;
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
-    private final UserAssembler userAssembler;
+    private final UserConverter userConverter;
 
     public LoginResponseDto login(LoginRequestDto requestDto) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -41,6 +41,6 @@ public class AuthenticationService {
                     .stream().map(grantedAuthority -> grantedAuthority.getAuthority())
                     .collect(Collectors.toList()) : new ArrayList<>());
         }});
-        return userAssembler.convertToLoginResponseDto(principal, jwt);
+        return userConverter.convertToLoginResponseDto(principal, jwt);
     }
 }
