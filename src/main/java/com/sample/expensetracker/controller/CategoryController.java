@@ -1,9 +1,11 @@
 package com.sample.expensetracker.controller;
 
 import com.sample.expensetracker.api.CategoryDto;
+import com.sample.expensetracker.exception.DuplicateCategoryException;
 import com.sample.expensetracker.service.CategoryCacheableService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +23,27 @@ public class CategoryController {
 
     private final CategoryCacheableService categoryService;
 
-    @PostMapping("/add")
+    /**
+     * @param dto
+     * @throws DuplicateCategoryException when category name is already created
+     */
+    @PostMapping(value = "/add",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured("ROLE_ADMIN")
-    public void addCategory(@RequestBody CategoryDto dto) {
-        categoryService.saveCategory(dto);
+    public CategoryDto addCategory(@RequestBody CategoryDto dto) throws DuplicateCategoryException {
+        return categoryService.saveCategory(dto);
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public List<CategoryDto> getAllCategories() {
         return categoryService.cacheableGetAll();
+    }
+
+    @DeleteMapping("/remove/{categoryId}")
+    @Secured("ROLE_ADMIN")
+    public void removeCategory(@PathVariable("categoryId") Integer categoryId) {
+        categoryService.removeCategory(categoryId);
     }
 }

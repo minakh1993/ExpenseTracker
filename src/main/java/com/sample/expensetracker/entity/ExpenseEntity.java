@@ -15,7 +15,7 @@ public class ExpenseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "AMOUNT", nullable = false)
     private BigDecimal amount;
@@ -27,11 +27,11 @@ public class ExpenseEntity {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

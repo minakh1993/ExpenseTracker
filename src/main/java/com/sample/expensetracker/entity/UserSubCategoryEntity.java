@@ -14,7 +14,7 @@ public class UserSubCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_USER"), nullable = false, updatable = false)
@@ -27,11 +27,11 @@ public class UserSubCategoryEntity {
     @Column(name = "SUB_CATEGORY", nullable = false)
     private String subCategoryName;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

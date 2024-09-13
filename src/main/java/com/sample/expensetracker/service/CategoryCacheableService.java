@@ -5,6 +5,7 @@ import com.sample.expensetracker.cache.AbstractCacheableService;
 import com.sample.expensetracker.cache.CacheName;
 import com.sample.expensetracker.converter.CategoryConverter;
 import com.sample.expensetracker.entity.CategoryEntity;
+import com.sample.expensetracker.exception.DuplicateCategoryException;
 import com.sample.expensetracker.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,24 @@ public class CategoryCacheableService extends AbstractCacheableService<CategoryD
         return categoryConverter.convertCategories(allCategories);
     }
 
-    public void saveCategory(CategoryDto dto) {
-        //TODO implement saving new category
+    public synchronized CategoryDto saveCategory(CategoryDto dto) throws DuplicateCategoryException {
+        List<CategoryDto> categoryList = cacheableGetAll();
+        for (CategoryDto categoryDto : categoryList) {
+            if (categoryDto.getName().equalsIgnoreCase(dto.getName())) {
+                throw new DuplicateCategoryException("duplicate category name : " + dto.getName());
+            }
+        }
+        CategoryEntity category = categoryConverter.convertToEntity(dto);
+        CategoryEntity savedCategory = categoryRepository.save(category);
+        CategoryDto categoryDto = categoryConverter.convertCategory(savedCategory);
+        addToCache(categoryDto);
+        return categoryDto;
+    }
+
+    public void removeCategory(Integer categoryId) {
+        CategoryEntity entity = new CategoryEntity();
+        entity.setId(categoryId);
+        categoryRepository.delete(entity);
+        removeFromCache(String.valueOf(categoryId));
     }
 }

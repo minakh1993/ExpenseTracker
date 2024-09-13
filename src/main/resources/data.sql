@@ -9,11 +9,11 @@ drop sequence if exists app_user_seq;
 drop sequence if exists category_seq;
 drop sequence if exists expense_seq;
 drop sequence if exists user_sub_category_seq;
-create sequence app_role_seq start with 1 increment by 50;
-create sequence app_user_seq start with 1 increment by 50;
-create sequence category_seq start with 1 increment by 50;
-create sequence expense_seq start with 1 increment by 50;
-create sequence user_sub_category_seq start with 1 increment by 50;
+create sequence app_role_seq start with 10 increment by 50;
+create sequence app_user_seq start with 10 increment by 50;
+create sequence category_seq start with 10 increment by 50;
+create sequence expense_seq start with 10 increment by 50;
+create sequence user_sub_category_seq start with 10 increment by 50;
 create table APP_USER
 (
     enabled       boolean      not null,

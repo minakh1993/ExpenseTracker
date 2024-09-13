@@ -69,4 +69,8 @@ public abstract class AbstractCacheableService<T extends KeyProvider> {
             }
         }
     }
+
+    public void removeFromCache(String id) {
+        cacheManagerUtility.removeFromCache(getCacheName(), id);
+    }
 }

@@ -26,10 +26,16 @@ public class CategoryConverter {
         return categoryList;
     }
 
-    private CategoryDto convertCategory(CategoryEntity category) {
+    public CategoryDto convertCategory(CategoryEntity category) {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
         return categoryDto;
+    }
+
+    public CategoryEntity convertToEntity(CategoryDto categoryDto) {
+        CategoryEntity category = new CategoryEntity();
+        category.setName(categoryDto.getName());
+        return category;
     }
 }
