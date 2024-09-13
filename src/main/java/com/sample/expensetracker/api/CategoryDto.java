@@ -2,6 +2,7 @@ package com.sample.expensetracker.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sample.expensetracker.cache.KeyProvider;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author M.khoshnevisan
@@ -9,8 +10,10 @@ import com.sample.expensetracker.cache.KeyProvider;
  */
 public class CategoryDto implements KeyProvider {
 
+    @Schema(description = "${CategoryDto.id}")
     private int id;
 
+    @Schema(description = "${CategoryDto.name}", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
     public int getId() {
