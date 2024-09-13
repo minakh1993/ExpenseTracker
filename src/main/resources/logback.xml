@@ -18,6 +18,8 @@
     <logger name="com.sample" level="${APPLICATION_LEVEL}"/>
     <logger name="org.springframework" level="${APPLICATION_LEVEL}"/>
     <logger name="org.springframework.security" level="${APPLICATION_LEVEL}"/>
+    <logger name="com.tosan.http.server.starter.util.HttpLogUtil" level="${APPLICATION_LEVEL}"/>
+    <logger name="com.tosan.http.server.starter.filter.HttpLoggingFilter" level="${APPLICATION_LEVEL}"/>
 
     <root level="${ROOT_LEVEL}">
         <appender-ref ref="CONSOLE"/>

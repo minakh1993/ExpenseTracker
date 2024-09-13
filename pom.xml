@@ -23,6 +23,8 @@
 
     <properties>
         <java.version>17</java.version>
+        <httpserver.version>2.0.9</httpserver.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
     </properties>
     <dependencies>
         <dependency>
@@ -69,7 +71,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.4</version>
+            <version>${commons-collections4.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -80,6 +82,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tosan.server.http</groupId>
+            <artifactId>tosan-httpserver-spring-boot-starter</artifactId>
+            <version>${httpserver.version}</version>
         </dependency>
     </dependencies>
 
