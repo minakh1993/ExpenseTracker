@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expense-tracker-app-deployment
+  namespace: test
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: expense-tracker
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: expense-tracker
+    spec:
+      containers:
+        - name: expense-tracker
+          image: expensetracker
+          ports:
+            - containerPort: 8082
+          env:
+            - name: TZ
+              value: Asia/Tehran

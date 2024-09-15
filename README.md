@@ -152,5 +152,27 @@ sample of login log:
     }
 ```
 
+### Automation
+create app image with below command:
+```
+docker build -t expensetracker .
+```
+also run docker-compose with below command:
+```
+docker-compose up
+```
+for using deployment file, first create app image. then create test namespace with below command:
+```
+kubectl create namespace test
+```
+then you can apply file with following command:
+```
+kubectl apply -f expenseTracker-deployment.yaml
+```
+then you can see pods via below command:
+```
+kubectl get pods -n test
+```
+
 ### Test
 
