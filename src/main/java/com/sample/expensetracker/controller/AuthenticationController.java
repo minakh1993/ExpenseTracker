@@ -6,6 +6,7 @@ import com.sample.expensetracker.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class AuthenticationController {
     @PostMapping(value = "/login",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public LoginResponseDto login(@RequestBody LoginRequestDto requestDto) {
+    public LoginResponseDto login(@RequestBody @Valid LoginRequestDto requestDto) {
         return authenticationService.login(requestDto);
     }
 }

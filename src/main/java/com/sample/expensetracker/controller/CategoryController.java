@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -42,7 +43,7 @@ public class CategoryController {
                     @ApiResponse(responseCode = "401", description = "unauthorized"),
                     @ApiResponse(responseCode = "400", description = "md:addCategory.md"),
             })
-    public CategoryDto addCategory(@RequestBody CategoryDto dto) throws DuplicateCategoryException {
+    public CategoryDto addCategory(@RequestBody @Valid CategoryDto dto) throws DuplicateCategoryException {
         return categoryService.saveCategory(dto);
     }
 
