@@ -43,7 +43,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "FAMILY", nullable = false)
     private String family;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "USER_ROLE",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
