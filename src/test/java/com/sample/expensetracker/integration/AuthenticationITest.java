@@ -25,9 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Slf4j
 public class AuthenticationITest extends BaseITest {
 
-    @Autowired
-    private TestRestTemplate restTemplate;
-
     public static final String LOGIN_URL = "/auth/login";
 
     @BeforeEach
