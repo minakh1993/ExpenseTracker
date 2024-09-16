@@ -19,8 +19,6 @@ roles to each user. currently two main role is defined in this project.
 > ADMIN  
 > USER 
 
-project ER diagram is as below:
-
 ### Security
 authentication and authorization in this project is provided via spring security.
 all endpoints unless /auth/login endpoint are protected. BCrypt Hashing algorithm is used as password hashing mechanism.

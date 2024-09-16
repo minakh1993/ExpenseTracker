@@ -5,6 +5,8 @@ import com.sample.expensetracker.api.SignUpResponseDto;
 import com.sample.expensetracker.exception.DuplicateUsernameException;
 import com.sample.expensetracker.exception.EntityAlreadyExistException;
 import com.sample.expensetracker.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,11 @@ public class UserManagementController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured("ROLE_USER")
+    @Operation(operationId = "signUp", description = "${signUp}",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Ok"),
+                    @ApiResponse(responseCode = "400", description = "md:signUp.md"),
+            })
     public SignUpResponseDto signUp(@RequestBody SignUpRequestDto requestDto) throws EntityAlreadyExistException, DuplicateUsernameException {
         return userService.signup(requestDto);
     }
