@@ -14,6 +14,16 @@ create sequence app_user_seq start with 10 increment by 50;
 create sequence category_seq start with 10 increment by 50;
 create sequence expense_seq start with 10 increment by 50;
 create sequence user_sub_category_seq start with 10 increment by 50;
+
+create table INT_LOCK
+(
+    LOCK_KEY     char(255),
+    REGION       varchar(255),
+    CLIENT_ID    char(36),
+    CREATED_DATE TIMESTAMP NOT NULL,
+    constraint INT_LOCK_PK primary key (LOCK_KEY, REGION)
+);
+
 create table APP_USER
 (
     enabled       boolean      not null,
@@ -24,7 +34,9 @@ create table APP_USER
     NATIONAL_CODE varchar(15),
     NAME          varchar(50),
     FAMILY        varchar(100),
-    primary key (id)
+    primary key (id),
+    constraint UK_USER_1 unique (NATIONAL_CODE),
+    constraint UK_USER_2 unique (username)
 );
 create table APP_ROLE
 (

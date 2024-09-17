@@ -12,7 +12,10 @@ import java.util.Date;
  * @author M.khoshnevisan
  * @since 9/12/2024
  */
-@Table(name = "APP_USER")
+@Table(name = "APP_USER", uniqueConstraints = {
+        @UniqueConstraint(name = "UK_USER_1", columnNames = {"NATIONAL_CODE"}),
+        @UniqueConstraint(name = "UK_USER_2", columnNames = {"USERNAME"})
+})
 @Entity
 public class UserEntity implements UserDetails {
 

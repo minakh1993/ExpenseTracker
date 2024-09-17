@@ -4,7 +4,7 @@ import com.sample.expensetracker.api.SignUpRequestDto;
 import com.sample.expensetracker.api.SignUpResponseDto;
 import com.sample.expensetracker.exception.DuplicateUsernameException;
 import com.sample.expensetracker.exception.EntityAlreadyExistException;
-import com.sample.expensetracker.service.UserService;
+import com.sample.expensetracker.service.SignUpService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class UserManagementController {
 
-    private final UserService userService;
+    private final SignUpService service;
 
     @PostMapping(value = "/signup",
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -40,6 +40,6 @@ public class UserManagementController {
                     @ApiResponse(responseCode = "400", description = "md:signUp.md"),
             })
     public SignUpResponseDto signUp(@RequestBody SignUpRequestDto requestDto) throws EntityAlreadyExistException, DuplicateUsernameException {
-        return userService.signup(requestDto);
+        return service.signup(requestDto);
     }
 }

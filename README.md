@@ -175,3 +175,5 @@ kubectl get pods -n test
 ### Test
 used instancio library in order to simply create test data and mockito for mocking associations.
 
+### Lock
+user JdbcLockRegistry as distributed pessimistic lock mechanism. 
